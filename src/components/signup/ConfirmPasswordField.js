@@ -1,0 +1,86 @@
+import React from 'react';
+import {FormControl,Grid,InputBase,InputAdornment,IconButton} from '@mui/material';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import useStyles from './styles.js';
+
+
+export const ConfirmPasswordField = (props) => {
+
+    const {values,setValues} = props;
+    const styles = useStyles();
+
+    const handleClickShowPassword = () => {
+        setValues({ ...values, showCPassword: !values.showCPassword });
+    };
+    
+    const handleMouseDownPassword = (event) => {
+        event.preventDefault();
+    };
+
+    const validatePassword = (key) => {
+        if((/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/.test(key)&&key.length>4) || key.length <= 0){
+            setValues({...values,isCPasswordCorrect: true,cpassword: key.trim(),isValidated: true});
+        }
+        else{
+            setValues({...values,isCPasswordCorrect: false,cpassword: key.trim(),isValidated: true});
+        }
+    }
+
+    return (
+        <>
+            <FormControl 
+                className={
+                    values.isCPasswordCorrect 
+                    ? styles.inputBox
+                    : styles.inputBoxErr
+                }
+            >
+                <Grid container spacing={3} alignItems="flex-end" className={styles.inputBox2}>
+                    <Grid item xs={1}>
+                        <LockOutlinedIcon className={styles.icons}/>
+                    </Grid>
+                    <Grid item xs={11}>
+                        <InputBase
+                            id="input-password"
+                            className={styles.input}
+                            placeholder="Confirm Password"
+                            inputProps={{ maxLength: 20,'aria-label': 'naked' }}
+                            type={values.showCPassword ? 'text' : 'password'}
+                            value={values.cpassword}
+                            onChange={
+                                (e)=>{
+                                    validatePassword(e.target.value);
+                                }
+                            }
+                            error={values.isCPasswordCorrect}
+                            endAdornment={
+                                <InputAdornment position="end">
+                                    <IconButton
+                                        aria-label="toggle password visibility"
+                                        onClick={handleClickShowPassword}
+                                        onMouseDown={handleMouseDownPassword}
+                                    >
+                                    {
+                                    values.showCPassword ? 
+                                        <VisibilityIcon className={styles.icons}/> : 
+                                        <VisibilityOffIcon className={styles.icons}/>
+                                    }
+                                    </IconButton>
+                                </InputAdornment>
+                            }
+                        />
+                    </Grid>
+                </Grid>
+            </FormControl>
+            {
+                    values.isCPasswordCorrect
+                    ? ''
+                    : <p className={styles.helpText}>
+                        Password doesn't match the rquirements.
+                    </p>
+            }
+        </>
+    )
+}
