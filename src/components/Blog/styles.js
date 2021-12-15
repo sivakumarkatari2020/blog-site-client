@@ -50,5 +50,22 @@ export const useStyles = makeStyles({
         minWidth: '500px',
         height: '500px',
         fontSize: '18px',
-    }
+    },
+    form_shown:{
+        width: '90%',
+        height: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-around',
+        alignItems: 'center',
+    },
+    inp: {
+        width: '80%',
+        margin: '1rem',
+    },
+    floatEdit: {
+        position: 'absolute',
+        top: '80%',
+        left: '85%',
+    },
 })

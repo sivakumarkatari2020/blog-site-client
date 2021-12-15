@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useHistory } from 'react-router';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -11,7 +12,7 @@ import Menu from '@mui/material/Menu';
 
 export default function MenuAppBar() {
   const [anchorEl, setAnchorEl] = React.useState(null);
-
+  const history = useHistory();
 
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
@@ -19,6 +20,17 @@ export default function MenuAppBar() {
 
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const handleProfileClick = () => {
+    setAnchorEl(null);
+    history.push('/home/profile')
+  };
+
+  const handleLogoutClick = () => {
+    setAnchorEl(null);
+    sessionStorage.clear();
+    history.push('/login');
   };
 
   return (
@@ -63,8 +75,8 @@ export default function MenuAppBar() {
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
               >
-                <MenuItem onClick={handleClose}>Profile</MenuItem>
-                <MenuItem onClick={handleClose}>My account</MenuItem>
+                <MenuItem onClick={handleProfileClick}>Profile</MenuItem>
+                <MenuItem onClick={handleLogoutClick}>Logout</MenuItem>
               </Menu>
             </div>
         </Toolbar>
