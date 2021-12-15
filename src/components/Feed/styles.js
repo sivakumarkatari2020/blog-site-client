@@ -42,6 +42,20 @@ export const useStyles = makeStyles({
             width: '100%',
         },
     },
+    innerBodyPost: {
+        width: '100%',
+        height: '100%',
+        color: '#2D3F4B',
+
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'flex-start',
+        justifyContent: 'flex-start',
+
+        '@media (max-width:1000px)': {
+            width: '100%',
+        },
+    },
     card: {
         width: '90%',
         height: '100px',
@@ -65,5 +79,22 @@ export const useStyles = makeStyles({
         flexDirection: 'row',
         justifyContent: 'flex-start',
         alignItems: 'center',
-    }
+    },
+    reactions: {
+        width: '100px',
+        heigth: '70px',
+        padding: '0.5rem',
+        borderRadius: '35px',
+        background: '#3f51b5',
+        color: 'white',
+        textAlign: 'center',
+    },
+    arrowBack: {
+        width: '70px',
+        height: '50px',
+        margin: '2rem 0',
+    },
+    post_para: {
+        height: '60%',
+    },
 })

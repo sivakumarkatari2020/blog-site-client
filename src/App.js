@@ -5,6 +5,7 @@ import Signup from './components/signup';
 import Feed from './components/Feed';
 import Blog from './components/Blog';
 import Profile from './components/Profile';
+import Post from './components/Posts';
 //import useToken from './useToken';
 
 function App() {
@@ -36,6 +37,9 @@ function App() {
         </Route>
         <Route exact path="/home/feed">
           <Feed />
+        </Route>
+        <Route exact path="/home/feed/post/:post_id">
+          <Post />
         </Route>
         <Route exact path="/home/blog">
           <Blog />
