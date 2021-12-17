@@ -51,9 +51,26 @@ export const useStyles = makeStyles({
         height: '500px',
         fontSize: '18px',
     },
+    mainBody_formshown: {
+        width: '90%',
+        height: '80%',
+        //overflow: 'auto',
+        color: '#2D3F4B',
+        //position: 'relative',
+
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+
+        '@media (max-width:1000px)': {
+            width: '100%',
+        },
+    },
     form_shown:{
         width: '90%',
         height: '100%',
+        //position: 'relative',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-around',
@@ -64,8 +81,11 @@ export const useStyles = makeStyles({
         margin: '1rem',
     },
     floatEdit: {
-        position: 'absolute',
-        top: '80%',
-        left: '85%',
+        width: '80%',
+        margin: '1rem 0',
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
+        alignItems: 'center',
     },
 })

@@ -6,6 +6,7 @@ import Feed from './components/Feed';
 import Blog from './components/Blog';
 import Profile from './components/Profile';
 import Post from './components/Posts';
+import EditProfile from './components/Profile/editProfile';
 //import useToken from './useToken';
 
 function App() {
@@ -46,6 +47,9 @@ function App() {
         </Route>
         <Route exact path="/home/profile">
           <Profile />
+        </Route>
+        <Route exact path="/home/editProfile">
+          <EditProfile />
         </Route>
       </Switch>
     </div>

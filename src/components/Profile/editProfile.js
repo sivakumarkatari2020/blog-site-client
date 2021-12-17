@@ -3,9 +3,7 @@ import { useHistory } from 'react-router';
 import { useStyles } from '../Blog/styles';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import {Box,TextField} from '@mui/material';
-import Fab from '@mui/material/Fab';
-import EditIcon from '@mui/icons-material/Edit';
+import {Box,TextField,Button,FormControl,InputLabel,Select,MenuItem} from '@mui/material';
 import MenuAppBar from '../MenuAppBar';
 import MenuBottomBar from '../MenuBottomBar';
 import Loader from '../Loader';
@@ -41,23 +39,15 @@ function Profile() {
                     isLoading
                     ? <Loader />
                     : <form className='form_shown'>
-                        <Box className={styles.floatEdit}>
-                            <Fab color="primary" aria-label="edit" 
-                                className={styles.floatEdit}
-                                onClick={()=>{
-                                    history.push('/home/editProfile');
-                                }}
-                            >
-                                <EditIcon />
-                            </Fab>
-                        </Box>
                         <TextField 
                             id="outlined-email" 
                             variant="outlined" 
                             className={styles.inp}
                             value={data?.user_mail}
+                            onChange={(e)=>{
+                                setData({...data,user_mail:e.target.value});
+                            }}
                             label="User Mail ID"
-                            disabled
                         />
                         <br />
                         <br />
@@ -66,8 +56,10 @@ function Profile() {
                             variant="outlined" 
                             className={styles.inp}
                             value={data?.user_fname}
+                            onChange={(e)=>{
+                                setData({...data,user_fname:e.target.value});
+                            }}
                             label="First Name"
-                            disabled
                         />
                         <br />
                         <br />
@@ -76,19 +68,30 @@ function Profile() {
                             variant="outlined" 
                             className={styles.inp}
                             value={data?.user_lname}
+                            onChange={(e)=>{
+                                setData({...data,user_lname:e.target.value});
+                            }}
                             label="Last Name"
-                            disabled
                         />
                         <br />
                         <br />
-                        <TextField
-                            id="outlined-gender"
-                            variant="outlined" 
-                            className={styles.inp}
-                            value={data?.user_gender}
-                            label="Gender"
-                            disabled
-                        />
+                        <FormControl>
+                            <InputLabel id="Outlined-gender">Gender</InputLabel>
+                            <Select
+                                labelId="demo-simple-select-label"
+                                id="demo-simple-select"
+                                value={data.user_gender}
+                                label="Age"
+                                onChange={(e)=>{
+                                    setData({...data,user_gender:e.target.value})
+                                }}
+                                classname={styles.inp}
+                            >
+                                <MenuItem value="male">Male</MenuItem>
+                                <MenuItem value="female">Female</MenuItem>
+                                <MenuItem value="other">Other</MenuItem>
+                            </Select>
+                        </FormControl>
                         <br />
                         <br />
                         <TextField
@@ -96,9 +99,18 @@ function Profile() {
                             variant="outlined" 
                             className={styles.inp}
                             value={data?.user_mobile}
+                            onChange={(e)=>{
+                                setData({...data,user_mobile:e.target.value});
+                            }}
                             label="Mobile"
-                            disabled
                         />
+                        <br />
+                        <br />
+                        <Button onClick={()=>{
+                            history.push('/home/profile');
+                        }}
+                        variant="contained"
+                        >SAVE</Button>
                     </form>
                 }
             </Box>
