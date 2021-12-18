@@ -39,6 +39,7 @@ function Login(props) {
         const apiResult = await verifyAPI(credentials);
         if(apiResult.status === 200){
             sessionStorage.setItem('userId',apiResult.data[0].user_id);
+            sessionStorage.setItem('userRole',apiResult.data[0].user_role);
             setValues({...values,isValidated : true,isLoading: false});
             //const token = await loginAPI(values);
             //setToken(token);        

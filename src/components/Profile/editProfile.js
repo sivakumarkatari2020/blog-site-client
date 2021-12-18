@@ -3,11 +3,12 @@ import { useHistory } from 'react-router';
 import { useStyles } from '../Blog/styles';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import {Box,TextField,Button,FormControl,InputLabel,Select,MenuItem} from '@mui/material';
+import {Box,TextField,ButtonGroup,Button,FormControl,InputLabel,Select,MenuItem} from '@mui/material';
 import MenuAppBar from '../MenuAppBar';
 import MenuBottomBar from '../MenuBottomBar';
 import Loader from '../Loader';
 import getUserDetailsAPI from '../../apis/getUserDetailsAPI';
+import editUserDetailsAPI from '../../apis/editUserDetailsAPI';
 
 toast.configure();
 
@@ -28,6 +29,31 @@ function Profile() {
             setLoading(false);
         })()
     },[])
+
+    const handleUpdate = async () => {
+        try{
+            const userID = sessionStorage.getItem("userId");
+            let apiResult = await editUserDetailsAPI(JSON.parse(userID),data);
+            if(apiResult.data.status === 200){
+                toast.success(apiResult.data.message,{
+                    autoClose: 1000,
+                })
+                history.push('/home/profile');
+            }else if(apiResult.data.status === 403){
+                toast.error(apiResult.data.message,{
+                    autoClose: 1000,
+                })
+                history.push('/home/profile');
+            }else{
+                toast.error('Error!Try again later.',{
+                    autoClose: 1000,
+                })
+                history.push('/home/profile');
+            }
+        } catch (err) {
+            console.log(err);
+        }
+    }
 
     return (
         <Box className={styles.outer}>
@@ -81,11 +107,11 @@ function Profile() {
                                 labelId="demo-simple-select-label"
                                 id="demo-simple-select"
                                 value={data.user_gender}
-                                label="Age"
+                                label="Gender"
                                 onChange={(e)=>{
                                     setData({...data,user_gender:e.target.value})
                                 }}
-                                classname={styles.inp}
+                                className={styles.inpSelect}
                             >
                                 <MenuItem value="male">Male</MenuItem>
                                 <MenuItem value="female">Female</MenuItem>
@@ -106,11 +132,17 @@ function Profile() {
                         />
                         <br />
                         <br />
-                        <Button onClick={()=>{
-                            history.push('/home/profile');
-                        }}
-                        variant="contained"
-                        >SAVE</Button>
+                        <ButtonGroup variant="contained" aria-label="outlined primary button group">
+                            <Button onClick={handleUpdate}
+                                variant="contained"
+                            >UPDATE</Button>
+                            <Button onClick={()=>{
+                                history.push('/home/profile');
+                                }}
+                                variant="contained"
+                                color="secondary"
+                            >CANCEL</Button>
+                        </ButtonGroup>
                     </form>
                 }
             </Box>

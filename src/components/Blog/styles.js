@@ -77,15 +77,30 @@ export const useStyles = makeStyles({
         alignItems: 'center',
     },
     inp: {
-        width: '80%',
+        width: '400px',
         margin: '1rem',
+
+        '@media (max-width:500px)': {
+            width: '350px',
+        }
+    },
+    inpSelect: {
+        width: '400px',
+
+        '@media (max-width:500px)': {
+            width: '350px',
+        }
     },
     floatEdit: {
-        width: '80%',
+        width: '400px',
         margin: '1rem 0',
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'flex-end',
         alignItems: 'center',
+
+        '@media (max-width:500px)': {
+            width: '350px',
+        }
     },
 })

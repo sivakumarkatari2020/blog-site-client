@@ -95,6 +95,7 @@ function Blog() {
                             onChange={(e)=>{
                                 setValues({...values,title:e.target.value})
                             }}
+                            inputProps={{ maxLength: 50,'aria-label': 'naked'}}
                         />
                         <TextField
                             id="filled-multiline-static"

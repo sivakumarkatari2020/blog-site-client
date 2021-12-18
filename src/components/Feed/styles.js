@@ -72,6 +72,27 @@ export const useStyles = makeStyles({
         justifyContent: 'space-around',
 
         alignItems: 'flex-start',
+
+        cursor: 'pointer',
+    },
+    titleBox: {
+        width: '90%',
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+    },
+    delBox: {
+        width: '100px',
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    delCon: {
+        '&:hover':{
+            color: 'red',
+        }
     },
     likeBox: {
         width: '90%',
